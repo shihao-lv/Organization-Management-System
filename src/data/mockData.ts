@@ -1,0 +1,287 @@
+import { Organization, Personnel, OperationLog } from '../types';
+
+// 模拟组织数据
+export const mockOrganizations: Organization[] = [
+  {
+    id: '1',
+    name: '南平铝业股份有限公司',
+    type: 'company',
+    description: '领先的科技创新企业集团',
+    establishedDate: '1958',
+    status: 'active',
+    location: '福建省南平市延平区',
+    manager: '张总',
+    employeeCount: 5000,
+    createdBy: '系统管理员',
+    createdAt: '1958-06-15T09:00:00Z'
+  },
+  {
+    id: '2',
+    name: '技术研发部',
+    type: 'department',
+    parentId: '1',
+    description: '负责核心技术研发工作',
+    establishedDate: '2020-07-01',
+    status: 'active',
+    location: '南平总部A座',
+    manager: '李部长',
+    employeeCount: 85,
+    createdBy: '张总',
+    createdAt: '2024-07-01T10:30:00Z'
+  },
+  {
+    id: '3',
+    name: '前端开发组',
+    type: 'team',
+    parentId: '2',
+    description: '负责前端界面开发',
+    establishedDate: '2020-07-10',
+    status: 'active',
+    location: '南平总部A座6层',
+    manager: '王组长',
+    employeeCount: 12,
+    createdBy: '李部长',
+    createdAt: '2024-07-10T14:15:00Z'
+  },
+  {
+    id: '4',
+    name: '后端开发组',
+    type: 'team',
+    parentId: '2',
+    description: '负责后端服务开发',
+    establishedDate: '2023-07-15',
+    status: 'active',
+    location: '南平总部A座5层',
+    manager: '赵组长',
+    employeeCount: 15,
+    createdBy: '李部长',
+    createdAt: '2023-07-15T14:20:00Z'
+  },
+  {
+    id: '5',
+    name: '市场营销部',
+    type: 'department',
+    parentId: '1',
+    description: '负责市场推广和销售工作',
+    establishedDate: '2020-06-20',
+    status: 'active',
+    location: '南平总部B座',
+    manager: '陈部长',
+    employeeCount: 45,
+    createdBy: '张总',
+    createdAt: '2020-06-20T11:00:00Z'
+  },
+  {
+    id: '6',
+    name: '销售团队',
+    type: 'team',
+    parentId: '5',
+    description: '负责产品销售工作',
+    establishedDate: '2020-08-01',
+    status: 'active',
+    location: '南平总部B座5层',
+    manager: '孙组长',
+    employeeCount: 20,
+    createdBy: '陈部长',
+    createdAt: '2024-08-01T09:00:00Z'
+  },
+  {
+    id: '7',
+    name: '长沙分公司',
+    type: 'branch',
+    parentId: '1',
+    description: '长沙地区业务分支机构',
+    establishedDate: '2023-09-01',
+    status: 'active',
+    location: '上海市浦东新区',
+    manager: '刘总',
+    employeeCount: 180,
+    createdBy: '张总',
+    createdAt: '2024-09-01T09:30:00Z'
+  },
+  {
+    id: '8',
+    name: '人力资源部',
+    type: 'department',
+    parentId: '1',
+    description: '负责人力资源管理',
+    establishedDate: '2025-06-18',
+    status: 'active',
+    location: '南平总部C座',
+    manager: '周部长',
+    employeeCount: 25,
+    createdBy: '张总',
+    createdAt: '2024-06-18T10:00:00Z'
+  }
+];
+
+// 模拟人员数据
+export const mockPersonnel: Personnel[] = [
+  {
+    id: '1',
+    name: '张伟',
+    position: '高级前端工程师',
+    organizationId: '3',
+    email: 'zhang.wei@company.com',
+    phone: '13800138001',
+    joinDate: '2021-07-15',
+    status: 'active',
+    department: '技术研发部',
+    manager: '王组长',
+    salary: 18000,
+    age: 28,
+    gender: 'male',
+    education: '本科',
+    createdBy: '李部长',
+    createdAt: '2021-07-15T09:00:00Z'
+  },
+  {
+    id: '2',
+    name: '李娜',
+    position: 'UI设计师',
+    organizationId: '3',
+    email: 'li.na@company.com',
+    phone: '13800138002',
+    joinDate: '2021-08-20',
+    status: 'active',
+    department: '技术研发部',
+    manager: '王组长',
+    salary: 15000,
+    age: 26,
+    gender: 'female',
+    education: '本科',
+    createdBy: '李部长',
+    createdAt: '2025-08-20T10:30:00Z'
+  },
+  {
+    id: '3',
+    name: '王强',
+    position: '产品经理',
+    organizationId: '5',
+    email: 'wang.qiang@company.com',
+    phone: '13800138003',
+    joinDate: '2021-06-10',
+    status: 'active',
+    department: '市场营销部',
+    manager: '陈部长',
+    salary: 22000,
+    age: 32,
+    gender: 'male',
+    education: '硕士',
+    createdBy: '陈部长',
+    createdAt: '2021-06-25T11:00:00Z'
+  },
+  {
+    id: '4',
+    name: '刘芳',
+    position: '后端工程师',
+    organizationId: '4',
+    email: 'liu.fang@company.com',
+    phone: '13800138004',
+    joinDate: '2021-07-08',
+    status: 'active',
+    department: '技术研发部',
+    manager: '赵组长',
+    salary: 16000,
+    age: 29,
+    gender: 'female',
+    education: '本科',
+    createdBy: '李部长',
+    createdAt: '2021-07-30T14:00:00Z'
+  },
+  {
+    id: '5',
+    name: '陈明',
+    position: '销售经理',
+    organizationId: '6',
+    email: 'chen.ming@company.com',
+    phone: '13800138005',
+    joinDate: '2021-08-15',
+    status: 'active',
+    department: '市场营销部',
+    manager: '孙组长',
+    salary: 20000,
+    age: 35,
+    gender: 'male',
+    education: '本科',
+    createdBy: '陈部长',
+    createdAt: '2021-08-05T16:30:00Z'
+  },
+  {
+    id: '6',
+    name: '赵丽',
+    position: 'HR专员',
+    organizationId: '8',
+    email: 'zhao.li@company.com',
+    phone: '13800138006',
+    joinDate: '2024-09-01',
+    status: 'active',
+    department: '人力资源部',
+    manager: '周部长',
+    salary: 12000,
+    age: 24,
+    gender: 'female',
+    education: '本科',
+    createdBy: '周部长',
+    createdAt: '2025-09-15T11:15:00Z'
+  }
+];
+
+// 模拟操作日志数据
+export const mockOperationLogs: OperationLog[] = [
+  {
+    id: '1',
+    type: 'create',
+    entityType: 'organization',
+    entityId: '3',
+    operatorName: '李部长',
+    operatorId: 'user_002',
+    timestamp: '2021-07-10T14:15:00Z',
+    description: '创建前端开发组'
+  },
+  {
+    id: '2',
+    type: 'update',
+    entityType: 'personnel',
+    entityId: '1',
+    operatorName: '王组长',
+    operatorId: 'user_003',
+    timestamp: '2024-08-15T16:20:00Z',
+    changes: {
+      position: { old: '前端工程师', new: '高级前端工程师' },
+      salary: { old: 15000, new: 18000 }
+    },
+    description: '更新张伟职位和薪资信息'
+  },
+  {
+    id: '3',
+    type: 'create',
+    entityType: 'personnel',
+    entityId: '2',
+    operatorName: '李部长',
+    operatorId: 'user_002',
+    timestamp: '2025-04-20T10:30:00Z',
+    description: '录入新员工李娜'
+  },
+  {
+    id: '4',
+    type: 'batch-import',
+    entityType: 'personnel',
+    entityId: 'batch_001',
+    operatorName: '系统管理员',
+    operatorId: 'admin',
+    timestamp: '2024-09-20T09:00:00Z',
+    description: '批量导入人员信息',
+    batchSize: 15
+  },
+  {
+    id: '5',
+    type: 'delete',
+    entityType: 'organization',
+    entityId: '9',
+    operatorName: '张总',
+    operatorId: 'user_001',
+    timestamp: '2024-09-18T13:45:00Z',
+    description: '删除已撤销的临时项目组'
+  }
+];
