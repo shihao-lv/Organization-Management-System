@@ -132,7 +132,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
         <div className="text-center mt-8">
           <p className="text-gray-400 text-sm">
-             2025 组织管理系统（T2021）.
+             2025 组织管理系统（T2201）.
           </p>
         </div>
       </div>
